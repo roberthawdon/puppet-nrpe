@@ -31,10 +31,11 @@ class nrpe::config::ssl {
   }
 
   file { $nrpe::nrpe_ssl_dir:
-    ensure => directory,
-    owner  => 'root',
-    group  => $nrpe::nrpe_group,
-    mode   => '0750',
+    ensure  => directory,
+    owner   => 'root',
+    group   => $nrpe::nrpe_group,
+    mode    => '0750',
+    seltype => 'nrpe_etc_t',
   }
   file { "${nrpe::nrpe_ssl_dir}/ca-cert.pem":
     ensure  => file,
@@ -42,6 +43,7 @@ class nrpe::config::ssl {
     group   => $nrpe::nrpe_group,
     mode    => '0640',
     content => $nrpe::ssl_cacert_file_content,
+    seltype => 'nrpe_etc_t',
   }
   file { "${nrpe::nrpe_ssl_dir}/nrpe-cert.pem":
     ensure  => file,
@@ -49,6 +51,7 @@ class nrpe::config::ssl {
     group   => $nrpe::nrpe_group,
     mode    => '0640',
     content => $nrpe::ssl_cert_file_content,
+    seltype => 'nrpe_etc_t',
   }
   file { "${nrpe::nrpe_ssl_dir}/nrpe-key.pem":
     ensure  => file,
@@ -56,5 +59,6 @@ class nrpe::config::ssl {
     group   => $nrpe::nrpe_group,
     mode    => '0640',
     content => $nrpe::ssl_privatekey_file_content,
+    seltype => 'nrpe_etc_t',
   }
 }
