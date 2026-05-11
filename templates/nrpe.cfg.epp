@@ -97,7 +97,7 @@ nrpe_group=<%= $nrpe_group %>
 #allowed_hosts=127.0.0.1
 <% if $allowed_hosts { -%>
 allowed_hosts=<%= $allowed_hosts.join(',') %>
-<% - } -%>
+<%- } -%>
 
 
 
