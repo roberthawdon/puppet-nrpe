@@ -42,6 +42,11 @@ class nrpe::config {
     default => bool2str($nrpe::allow_bash_command_substitution, '1', '0'),
   }
 
+  $_allowed_hosts = $nrpe::allowed_hosts ? {
+    undef   => undef,
+    default => $nrpe::allowed_hosts
+  }
+
   concat::fragment { 'nrpe main config':
     target  => $nrpe::config,
     content => epp(
@@ -53,7 +58,7 @@ class nrpe::config {
         'server_address'                  => $nrpe::server_address,
         'nrpe_user'                       => $nrpe::nrpe_user,
         'nrpe_group'                      => $nrpe::nrpe_group,
-        'allowed_hosts'                   => $nrpe::allowed_hosts,
+        'allowed_hosts'                   => $_allowed_hosts,
         'dont_blame_nrpe'                 => bool2str($nrpe::dont_blame_nrpe, '1', '0'),
         'allow_bash_command_substitution' => $_allow_bash_command_substitution,
         'libdir'                          => $nrpe::params::libdir,
