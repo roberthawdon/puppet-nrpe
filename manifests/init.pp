@@ -113,7 +113,7 @@
 #   Listen queue size (backlog) for serving incoming connections. You may want to increase this value under high load.
 #
 class nrpe (
-  Array[Variant[Stdlib::Fqdn,Stdlib::IP::Address]] $allowed_hosts       = ['127.0.0.1'],
+  Array[Variant[Stdlib::Fqdn,Stdlib::IP::Address]] $allowed_hosts       = undef,
   Stdlib::IP::Address                  $server_address                  = '0.0.0.0',
   Hash                                 $commands                        = {},
   Hash                                 $plugins                         = {},
